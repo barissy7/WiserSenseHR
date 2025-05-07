@@ -1,0 +1,80 @@
+﻿@model List<WiserSenseHR.Models.SpecialDayViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>YAKLAŞAN İŞE GİRİŞ YIL DÖNÜMLERİ</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="/SpecialDay/JobStarts">İş Yıl Dönümü</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .content-header {
+        border-top: 1.5px solid #ccc;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 7px;
+        margin-bottom: 10px;
+    }
+</style>
+<!-- /.content-header -->
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                İsim
+            </th>
+            <th class="text-center">
+                İşe Giriş Tarihi
+            </th>
+            <th class="text-center">
+                Yıl Dönümüne Kalan
+            </th>
+            <th style="width:50px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-center">
+                    @item.JobStartDate?.ToString("dd.MM.yyyy")
+                </td>
+                <td class="text-center">
+                    @if (item.DaysUntilJobStart.HasValue && item.DaysUntilJobStart < 7)
+                    {
+                        <span class="badge badge-danger">
+                            ⚠️ @item.DaysUntilJobStart gün kaldı
+                        </span>
+                    }
+                    else if (item.DaysUntilJobStart.HasValue)
+                    {
+                        <span class="badge badge-secondary">
+                            @item.DaysUntilJobStart gün kaldı
+                        </span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Detaylar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

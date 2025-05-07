@@ -1,0 +1,79 @@
+﻿@using WiserSenseHR.Data.Enums
+@model WiserSenseHR.Data.Entities.AssignedItem
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>YENİ EŞYA EKLE</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="/AssignedItem/Index">Zimmetli Eşyalar</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .content-header {
+        border-top: 1px solid #ccc;
+        padding-bottom: 2px;
+        margin-bottom: 10px;
+    }
+</style>
+<!-- /.content-header -->
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+
+                <label asp-for="ItemNames" class="control-label"> Eşya İsmi </label>
+
+                @foreach (var item in Enum.GetValues(typeof(AssignedItemName)).Cast<AssignedItemName>())
+                {
+                    <div class="custom-control custom-checkbox d-block mb-2">
+                        <input type="checkbox" name="ItemNames" value="@item" class="form-check-input"
+                        @(Model?.ItemNames != null && Model.ItemNames.Contains(item) ? "checked" : "") />
+                        <label class="form-check-label">@item</label>
+                    </div>
+                }
+                <span asp-validation-for="ItemNames" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"> Açıklama </label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            @* <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"> Kullanıcı Adı </label>
+                <select asp-for="UserId" class="form-control" asp-items="@(new SelectList(ViewBag.Users, "Value", "Text"))">
+                    <option value="">-- Kullanıcı Seçin --</option>
+                </select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>
+

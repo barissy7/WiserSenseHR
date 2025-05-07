@@ -1,0 +1,74 @@
+﻿@model IEnumerable<WiserSenseHR.Data.Entities.FoodList>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>YEMEK LİSTESİ</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="/FoodList/Index">Yemek Listesi</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .content-header {
+    border-top: 1.5px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+    }
+</style>
+<!-- /.content-header -->
+
+
+<p> 
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="btn btn-primary">Yeni Yemek Listesi</a>
+    }
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Fotoğraf/Resim
+            </th>
+            <th>
+                Açıklama
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="align-middle text-center">
+                <img src="@Url.Content("~/images/" + item.ImageUrl)" alt="Food Image" width="960" height="540" />
+            </td>
+            <td>
+                @Html.Raw(item.Description)
+            </td>
+            <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> 
+                <span>|</span>
+                <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

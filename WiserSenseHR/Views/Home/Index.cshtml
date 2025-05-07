@@ -1,0 +1,283 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/js/index.global.min.js"></script>
+
+<!-- Content Wrapper. Contains page content -->
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Anasayfa</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .content-header {
+            border-top: 1.5px solid #ccc;
+            border-bottom: 2px solid #ccc; 
+            padding-bottom: 7px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <!-- /.content-header -->
+
+    <!-- MOOD section -->
+    <style>
+
+    .mood-section {
+        padding: 20px;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    
+    .mood-section h3 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .mood-options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .mood {
+        padding: 10px 20px;
+        font-size: 1.1em;
+        background-color: #ddd;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+    
+    .mood:hover {
+        background-color: #157eb0;
+        color: white;
+    }
+    
+    .mood-selection {
+        margin-top: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .mood.energetic {
+        background-color: #f39c12;
+        color: white;
+    }
+
+    .mood.sad {
+        background-color: #3498db;
+        color: white;
+    }
+
+    .mood.disappointed {
+        background-color: #9b59b6;
+        color: white;
+    }
+
+    .mood.cheerful {
+        background-color: #2ecc71;
+        color: white;
+    }
+
+    .mood.exhausted {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    .mood.curious {
+        background-color: #f1c40f;
+        color: white;
+    }
+
+    .mood.annoyed {
+        background-color: #e67e22;
+        color: white;
+    }
+
+    .mood.calm {
+        background-color: #1abc9c;
+        color: white;
+    }
+    </style>
+
+    
+   
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <!-- ./col -->
+                <div class="col-lg-6 col-12">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>@ViewData["UserCount"]</h3>
+
+                            <p>Aktif Kayıtlı Kullanıcı</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="/User/Index" class="small-box-footer">Daha Fazla <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-6 col-12">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>@ViewData["MeetingCount"]</h3>
+
+                            <p>Aktif Toplantı</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="/Meeting/Index" class="small-box-footer">Daha Fazla <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-12 connectedSortable">
+                    <!-- MOOD section-->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fa-solid fa-icons mr-1"></i>
+                                MOOD
+                            </h3>
+                        </div> <!-- /.card-header -->
+                        <div class="card-tools text-center">
+                                 <div class="mood-section">
+                                     <h3>Bugün Nasılsın?</h3>
+                                     <div class="mood-options">
+                                         <span class="mood energetic">💪 Enerjik</span>
+                                         <span class="mood sad">😞 Üzgün</span>
+                                         <span class="mood disappointed">😔 Kırgın</span>
+                                         <span class="mood cheerful">😊 Neşeli</span>
+                                         <span class="mood exhausted">😩 Yorgun</span>
+                                         <span class="mood curious">🤔 Meraklı</span>
+                                         <span class="mood annoyed">😠 Sinirli</span>
+                                         <span class="mood calm">😌 Sakin</span>
+                                     </div>
+                                     <div class="mood-selection">
+                                         <span>Modunu Seç!</span>
+                                     </div>
+                                 </div>
+                            </div>
+                    </div>
+                    <!-- /.MOOD -->                   
+                </section>
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+<!-- FULLCALENDAR ENTEGRASYON -->
+<div id="calendar"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            views: {
+                dayGridMonth: {
+                    titleFormat: { year: 'numeric', month: 'long' }
+                },
+                timeGridWeek: {
+                    titleFormat: { year: 'numeric', month: 'long', day: 'numeric' }
+                },
+                timeGridDay: {
+                    titleFormat: { year: 'numeric', month: 'long', day: 'numeric' }
+                }
+            },
+
+            locale: 'tr',
+            timeZone: 'Europe/Istanbul',
+            allDayText: 'SAAT',
+            eventTimeFormat: {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            },
+
+            slotLabelFormat: {
+                hour: '2-digit',
+                minute: '2-digit',
+                meridiem: false
+            },
+
+            //Toplantıları takvime yansıtma
+            events: '/Home/GetMeetings', 
+            eventClick: function() {
+            window.location.href = '/Meeting/Index';
+            }
+
+        });
+
+        calendar.render();
+    });
+</script>
+
+
+<!-- /.content-wrapper -->
+<footer class="content-footer">
+    <strong>Tüm hakları saklıdır &copy; 2025 <a href="#ABY">Fizix AI HR</a></strong>
+    
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+</aside>
+<!-- /.control-sidebar -->
+
+
+
+<script>
+        document.querySelectorAll('.mood').forEach(function (moodElement) {
+        moodElement.addEventListener('click', function () {
+            
+            var selectedMood = moodElement.textContent.trim(); 
+
+            document.querySelector('.mood-selection span').textContent = "You are feeling: " + selectedMood;
+        });
+    });
+</script>

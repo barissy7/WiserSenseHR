@@ -1,0 +1,57 @@
+﻿@model WiserSenseHR.Data.Entities.FoodList
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>YENİ YEMEK LİSTESİ</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="/FoodList/Index">Yemek Listesi</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .content-header {
+        border-top: 1px solid #ccc;
+        padding-bottom: 2px;
+        margin-bottom: 10px;
+    }
+</style>
+<!-- /.content-header -->
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label">Fotoğraf/Resim</label>
+                <input asp-for="ImageUrl" type="file" class="form-control" id="ImageUrl" name="newImage" accept=".png, .jpg, .jpeg" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Açıklama</label>
+                <textarea asp-for="Description" id="summernote" style="display: none;"> </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>
+

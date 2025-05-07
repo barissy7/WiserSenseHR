@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WiserSenseHR.Data.Entities.Announcement>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+    $('#myTable').DataTable({
+    language: {
+    url: '//cdn.datatables.net/plug-ins/2.2.2/i18n/tr.json'
+    }
+    });
+    });
+
+
+</script>
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>DUYURULAR</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="/Announcement/Inde">Duyurular</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .content-header {
+    border-top: 1.5px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    }
+</style>
+<!-- /.content-header -->
+
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="btn btn-primary">Yeni Duyuru</a>
+    }
+</p>
+<table class="table table-bordered" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                Duyuru Tarihi
+            </th>
+            <th>
+                İsim
+            </th>
+            <th>
+                Açıklama
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.AnnouncementDate)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                    @Html.Raw(item.Description)
+            </td>
+            <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> 
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

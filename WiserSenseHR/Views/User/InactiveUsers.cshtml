@@ -1,0 +1,110 @@
+﻿@using WiserSenseHR.Data.Entities
+@model IEnumerable<WiserSenseHR.Data.Entities.User>
+
+@{
+    ViewData["Title"] = "InactiveUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>ESKİ KULLANICILAR</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="/User/Index">Kullanıcılar</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .content-header {
+        border-top: 1.5px solid #ccc;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 7px;
+        margin-bottom: 10px;
+    }
+</style>
+<!-- /.content-header -->
+
+<script>
+    $(document).ready(function () {
+         $('#myTable').DataTable({
+             language: {
+                 url: '//cdn.datatables.net/plug-ins/2.2.2/i18n/tr.json'
+             }
+         });
+     });
+</script>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Yeni Kullanıcı</a>
+</p>
+<table class="table table-bordered" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                İsim
+            </th>
+            <th>
+                Mail
+            </th>
+            <th>
+                Active
+            </th>
+            <th>
+                Rol
+            </th>
+            <th>
+                Departman
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                
+                    
+                <form asp-action="ActivateUser" asp-route-id="@item.Id" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-primary">Aktif Et</button>
+                </form> |
+                <form asp-action="HardDelete" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Bu kullanıcıyı kalıcı olarak silmek istediğinize emin misiniz?');">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger ">Kalıcı Sil</button>
+                </form> |
+    
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Düzenle</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>
