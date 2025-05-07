@@ -43,19 +43,12 @@ ZIP dosyasını çıkarın ve Visual Studio ile açın.
 ConnectionStrings:
   DefaultConnection: Host=localhost;Database=WiserSenseHRDb;Username=postgres;Password=yourpassword
 
-#### 3. Veritabanı Oluşturun
-dotnet ef database update
+#### 3. Veritabanı Yedeğini Yükleyin
+`WiserSenseWebDB_backup.sql` dosyasını pgAdmin veya psql komut satırı ile yükleyin. (Talimatlar aşağıda)
 
 #### 4. Uygulamayı Başlatın
 dotnet run
 
----
-
-### 🔐 Örnek Giriş Bilgileri
-
-E-posta: test@gmail.com  
-Şifre: 123456  
-Role: Admin
 ---
 
 ### 🗄️ Veritabanı Yedeğini Yükleme (Backup)
@@ -79,3 +72,11 @@ psql -U postgres -d WiserSenseHRDb -f WiserSenseWebDB_backup.sql
 
 > Not: `postgres` yerine kendi veritabanı kullanıcı adınızı yazın.  
 > Dosya yolunu da `.sql` dosyanızın konumuna göre düzenleyin.
+
+---
+
+### 🔐 Örnek Giriş Bilgileri
+
+E-posta: test@gmail.com  
+Şifre: 123456  
+Role: Admin
